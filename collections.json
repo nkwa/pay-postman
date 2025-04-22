@@ -1,0 +1,277 @@
+{
+  "info": {
+    "name": "Nkwa Pay API",
+    "description": "Use this API to integrate mobile money across your payment flows, create and manage payments, collections, and disbursements.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "8f5ea374-5ac2-4f54-8d7a-32e1e3fc05c4"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.staging.nkwapay.mynkwa.com",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "YOUR_API_KEY",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Get Payment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments/{{paymentId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments", "{{paymentId}}"],
+              "variable": [
+                {
+                  "key": "paymentId",
+                  "value": "123e4567-e89b-12d3-a456-426614174000",
+                  "description": "ID of payment to fetch"
+                }
+              ]
+            },
+            "description": "Get the payment (collection or disbursement) with the specified ID."
+          },
+          "response": [
+            {
+              "name": "Payment retrieved successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-Key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payments/{{paymentId}}",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["payments", "{{paymentId}}"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 5000,\n  \"createdAt\": \"2025-04-22T10:00:00Z\",\n  \"currency\": \"XAF\",\n  \"description\": \"Payment for services\",\n  \"fee\": 50,\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"merchantId\": 12345,\n  \"paymentType\": \"collection\",\n  \"phoneNumber\": \"237650000000\",\n  \"status\": \"success\",\n  \"telecomOperator\": \"mtn\",\n  \"updatedAt\": \"2025-04-22T10:15:00Z\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Collections",
+      "item": [
+        {
+          "name": "Collect Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000,\n  \"phoneNumber\": \"237650000000\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/collect",
+              "host": ["{{baseUrl}}"],
+              "path": ["collect"]
+            },
+            "description": "Collect a payment from a phone number."
+          },
+          "response": [
+            {
+              "name": "Collection request created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-API-Key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 5000,\n  \"phoneNumber\": \"237650000000\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/collect",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["collect"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 5000,\n  \"createdAt\": \"2025-04-22T10:00:00Z\",\n  \"currency\": \"XAF\",\n  \"description\": null,\n  \"fee\": 50,\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"merchantId\": 12345,\n  \"paymentType\": \"collection\",\n  \"phoneNumber\": \"237650000000\",\n  \"status\": \"pending\",\n  \"telecomOperator\": \"mtn\",\n  \"updatedAt\": \"2025-04-22T10:00:00Z\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disbursements",
+      "item": [
+        {
+          "name": "Disburse Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000,\n  \"phoneNumber\": \"237650000000\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/disburse",
+              "host": ["{{baseUrl}}"],
+              "path": ["disburse"]
+            },
+            "description": "Disburse a payment from your balance to a phone number."
+          },
+          "response": [
+            {
+              "name": "Disbursement request created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-API-Key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 5000,\n  \"phoneNumber\": \"237650000000\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/disburse",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["disburse"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 5000,\n  \"createdAt\": \"2025-04-22T10:00:00Z\",\n  \"currency\": \"XAF\",\n  \"description\": null,\n  \"fee\": 50,\n  \"id\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"merchantId\": 12345,\n  \"paymentType\": \"disbursement\",\n  \"phoneNumber\": \"237650000000\",\n  \"status\": \"pending\",\n  \"telecomOperator\": \"mtn\",\n  \"updatedAt\": \"2025-04-22T10:00:00Z\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Availability",
+      "item": [
+        {
+          "name": "Check Availability",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{apiKey}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/availability",
+              "host": ["{{baseUrl}}"],
+              "path": ["availability"]
+            },
+            "description": "Check which operators and operations are currently available."
+          },
+          "response": [
+            {
+              "name": "Operator availability data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-Key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/availability",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["availability"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"operator\": \"mtn\",\n    \"operation\": {\n      \"type\": \"collection\",\n      \"status\": \"OPERATIONAL\"\n    }\n  },\n  {\n    \"operator\": \"mtn\",\n    \"operation\": {\n      \"type\": \"disbursement\",\n      \"status\": \"OPERATIONAL\"\n    }\n  },\n  {\n    \"operator\": \"orange\",\n    \"operation\": {\n      \"type\": \"collection\",\n      \"status\": \"OPERATIONAL\"\n    }\n  },\n  {\n    \"operator\": \"orange\",\n    \"operation\": {\n      \"type\": \"disbursement\",\n      \"status\": \"SUSPENDED\"\n    }\n  }\n]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

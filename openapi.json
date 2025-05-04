@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://api.staging.nkwapay.mynkwa.com",
+      "url": "https://api.pay.staging.mynkwa.com",
       "description": "Staging server"
     }
   ],

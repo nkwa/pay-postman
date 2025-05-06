@@ -26,7 +26,7 @@ The collection includes the following API endpoints:
 
 1. Clone this repository or download the collection file:
    ```bash
-   git clone https://github.com/yourusername/pay-postman.git
+   git clone https://github.com/nkwa/pay-postman.git
    ```
 
 2. Import the collection into Postman:
@@ -37,7 +37,7 @@ The collection includes the following API endpoints:
 3. Set up environment variables:
    - Create a new environment in Postman
    - Add the following variables:
-     - `baseUrl`: Set to `https://api.staging.nkwapay.mynkwa.com` for testing
+     - `baseUrl`: Set to `https://api.pay.staging.mynkwa.com` for testing
      - `apiKey`: Your Nkwa Pay API key
 
 ### Usage
